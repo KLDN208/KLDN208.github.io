@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>自定义 Hook - React | KLDN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过自定义 Hook 可以将组件逻辑提取到可重用的函数中 自定义 Hook 是一个函数 名称以 use 开头 函数内部可调用其他 Hook 纯函数不能够根据 state 的变化执行  eg.123456789101112131415161718192021222324252627282930313233343536&#x2F;**	两组件 A，B	A 组件在用户上线时，会获取用户之前操作所产生的数据	B 组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义 Hook - React">
+<meta property="og:url" content="http://kldn.com/2020/11/21/Hook/CustomHook/index.html">
+<meta property="og:site_name" content="KLDN">
+<meta property="og:description" content="通过自定义 Hook 可以将组件逻辑提取到可重用的函数中 自定义 Hook 是一个函数 名称以 use 开头 函数内部可调用其他 Hook 纯函数不能够根据 state 的变化执行  eg.123456789101112131415161718192021222324252627282930313233343536&#x2F;**	两组件 A，B	A 组件在用户上线时，会获取用户之前操作所产生的数据	B 组">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-11-21T02:55:06.991Z">
+<meta property="article:modified_time" content="2020-11-21T07:38:14.018Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="KLDN" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">KLDN</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://kldn.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Hook/CustomHook" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/21/Hook/CustomHook/" class="article-date">
+  <time datetime="2020-11-21T02:55:06.991Z" itemprop="datePublished">2020-11-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hook/">Hook</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      自定义 Hook - React
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="通过自定义-Hook-可以将组件逻辑提取到可重用的函数中"><a href="#通过自定义-Hook-可以将组件逻辑提取到可重用的函数中" class="headerlink" title="通过自定义 Hook 可以将组件逻辑提取到可重用的函数中"></a>通过自定义 <code>Hook</code> 可以将组件逻辑提取到可重用的函数中</h4><ol>
+<li>自定义 <code>Hook</code> 是一个函数</li>
+<li>名称以 <code>use</code> 开头</li>
+<li>函数内部可调用其他 <code>Hook</code></li>
+<li>纯函数不能够根据 <code>state</code> 的变化执行</li>
+</ol>
+<h4 id="eg"><a href="#eg" class="headerlink" title="eg."></a>eg.</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	两组件 A，B</span></span><br><span class="line"><span class="comment">	A 组件在用户上线时，会获取用户之前操作所产生的数据</span></span><br><span class="line"><span class="comment">	B 组件在用户上线时，会弹窗欢迎的登陆的 message</span></span><br><span class="line"><span class="comment">	此时 A，B 组件通用的逻辑就是都要获取用户是否上线的状态，此时“判断用户是否上线的逻辑”便可写成自定义 hook</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件 A</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 获取用户数据</span></span><br><span class="line">  <span class="keyword">const</span> getData = useCallback(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> isOnline = useGetUserStatus(userId); <span class="comment">// userId 为用户唯一标识</span></span><br><span class="line">    <span class="keyword">if</span> (isOnline) &#123;</span><br><span class="line">      <span class="keyword">const</span> res = <span class="keyword">await</span> getUserData(userId);</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [userId])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件 B</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">	useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> isOnline = useGetUserStatus(userId); <span class="comment">// userId 为用户唯一标识</span></span><br><span class="line">    <span class="keyword">if</span> (isOnline) &#123;</span><br><span class="line">      message.success(<span class="string">&#x27;欢迎回来&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [userId]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果在用户登陆时，还有双方都需要做的操作，可在 useGetUserStatus 中书写</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useGetUserStatus</span>(<span class="params">&#123; userId &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 通用操作</span></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;, [userId]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kldn.com/2020/11/21/Hook/CustomHook/" data-id="cki456cm80004asyadz5x8ymn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/30/Python3/Python3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Python3 环境准备
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/02/Hexo/BuildBlog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hexo + Github Pages 搭建个人博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hook/">Hook</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python3/">Python3</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/11/30/Python3/Python3/">Python3 环境准备</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/Hook/CustomHook/">自定义 Hook - React</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/02/Hexo/BuildBlog/">Hexo + Github Pages 搭建个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/02/Home/">Welcome to my blog</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 KLDN<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

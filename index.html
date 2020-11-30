@@ -63,6 +63,114 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Python3/Python3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/30/Python3/Python3/" class="article-date">
+  <time datetime="2020-11-30T05:48:56.937Z" itemprop="datePublished">2020-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python3/">Python3</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/30/Python3/Python3/">Python3 环境准备</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="本文针对-macOS-系统"><a href="#本文针对-macOS-系统" class="headerlink" title="本文针对 macOS 系统"></a>本文针对 macOS 系统</h4><ol>
+<li><p><code>Mac</code> 系统自带 <strong>2.*</strong> 版本的 <code>python</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查看当前 python 版本</span></span><br><span class="line">python --version <span class="comment">// 2.7</span></span><br><span class="line"></span><br><span class="line">open /System/Library/Frameworks/Python.framework/Versions</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/mac-default-python.png"></p>
+</li>
+<li><p>安装包管理工具 - <code>Homebrew</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	1.打开一个终端</span></span><br><span class="line"><span class="comment">	macOs 自带终端</span></span><br><span class="line"><span class="comment">	或</span></span><br><span class="line"><span class="comment">	iTerm2</span></span><br><span class="line"><span class="comment">	2.输入下述命令，安装 Homebrew</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">/bin/bash -c <span class="string">&quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	无论是第一次安装，还是更新都会卡在</span></span><br><span class="line"><span class="comment">	将 homebrew-core 下载到 /usr/local/Homebrew/Library/Taps/homebrew/</span></span><br><span class="line"><span class="comment">	这一步</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">Cloning into <span class="string">&#x27;/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core&#x27;</span>...</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	解决方案</span></span><br><span class="line"><span class="comment">	1. 进到提示中的指定路径：/usr/local/Homebrew/Library/Taps/</span></span><br><span class="line"><span class="comment">	2.创建所需要文件夹：mkdir homebrew</span></span><br><span class="line"><span class="comment">	3.换路径下载所需依赖</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">cd /usr/local/Homebrew/Library/Taps/</span><br><span class="line">mkdir homebrew</span><br><span class="line">git clone https:<span class="comment">//mirrors.ustc.edu.cn/homebrew-core.git</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下载安装完毕后，查看能否正常使用</span></span><br><span class="line">brew -v || brew --version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 <code>Python3</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 Homebrew 下载 Python3</span></span><br><span class="line">brew install python3</span><br><span class="line"><span class="comment">// 安装完毕后，查看能否正常使用</span></span><br><span class="line">python3 --version <span class="comment">// 3.9.0</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编辑器<br>PS: 人们可能习惯把 <code>python</code> 和 <code>pycharm</code> 联系起来，但此处我们使用更好的 <code>vscode</code></p>
+<ol>
+<li>首先，去 <code>vscode</code> 扩展程序 - <code>EXTENSIONS</code> 内安装 <code>Python</code> 扩展程序。</li>
+<li>之前，我们已经安装好 <code>python3</code> 的开发环境。</li>
+<li>最后，我们在 <code>vscode</code> 内创建 <code>.py</code> 结尾的文件，<code>vscode</code> 会自动帮我们切换到 <code>Python 3.9.0 64-bit</code> 环境下开发</li>
+</ol>
+</li>
+<li><p><strong>至此，我们的全部前置准备都已结束，你可以开始你的 <code>Python3</code> 之旅了，祝你好运。</strong></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kldn.com/2020/11/30/Python3/Python3/" data-id="cki456cm90005asya39bj7xi1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Hook/CustomHook" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/11/21/Hook/CustomHook/" class="article-date">
+  <time datetime="2020-11-21T02:55:06.991Z" itemprop="datePublished">2020-11-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Hook/">Hook</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/11/21/Hook/CustomHook/">自定义 Hook - React</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="通过自定义-Hook-可以将组件逻辑提取到可重用的函数中"><a href="#通过自定义-Hook-可以将组件逻辑提取到可重用的函数中" class="headerlink" title="通过自定义 Hook 可以将组件逻辑提取到可重用的函数中"></a>通过自定义 <code>Hook</code> 可以将组件逻辑提取到可重用的函数中</h4><ol>
+<li>自定义 <code>Hook</code> 是一个函数</li>
+<li>名称以 <code>use</code> 开头</li>
+<li>函数内部可调用其他 <code>Hook</code></li>
+<li>纯函数不能够根据 <code>state</code> 的变化执行</li>
+</ol>
+<h4 id="eg"><a href="#eg" class="headerlink" title="eg."></a>eg.</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	两组件 A，B</span></span><br><span class="line"><span class="comment">	A 组件在用户上线时，会获取用户之前操作所产生的数据</span></span><br><span class="line"><span class="comment">	B 组件在用户上线时，会弹窗欢迎的登陆的 message</span></span><br><span class="line"><span class="comment">	此时 A，B 组件通用的逻辑就是都要获取用户是否上线的状态，此时“判断用户是否上线的逻辑”便可写成自定义 hook</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件 A</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 获取用户数据</span></span><br><span class="line">  <span class="keyword">const</span> getData = useCallback(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> isOnline = useGetUserStatus(userId); <span class="comment">// userId 为用户唯一标识</span></span><br><span class="line">    <span class="keyword">if</span> (isOnline) &#123;</span><br><span class="line">      <span class="keyword">const</span> res = <span class="keyword">await</span> getUserData(userId);</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [userId])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件 B</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span> </span>&#123;</span><br><span class="line">	useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> isOnline = useGetUserStatus(userId); <span class="comment">// userId 为用户唯一标识</span></span><br><span class="line">    <span class="keyword">if</span> (isOnline) &#123;</span><br><span class="line">      message.success(<span class="string">&#x27;欢迎回来&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [userId]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果在用户登陆时，还有双方都需要做的操作，可在 useGetUserStatus 中书写</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useGetUserStatus</span>(<span class="params">&#123; userId &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 通用操作</span></span><br><span class="line">  useEffect(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    ...</span><br><span class="line">  &#125;, [userId]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://kldn.com/2020/11/21/Hook/CustomHook/" data-id="cki456cm80004asyadz5x8ymn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Hexo/BuildBlog" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/11/02/Hexo/BuildBlog/" class="article-date">
@@ -81,7 +189,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2020/11/02/Hexo/BuildBlog/">Blog by Hexo + Github</a>
+      <a class="article-title" href="/2020/11/02/Hexo/BuildBlog/">Hexo + Github Pages 搭建个人博客</a>
     </h1>
   
 
@@ -89,7 +197,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="Hexo-Github-Pages-搭建个人博客"><a href="#Hexo-Github-Pages-搭建个人博客" class="headerlink" title="Hexo + Github Pages 搭建个人博客"></a>Hexo + Github Pages 搭建个人博客</h3><h5 id="：以下划线开头的单词为自定义，非专有名词；-confg-yml-除外"><a href="#：以下划线开头的单词为自定义，非专有名词；-confg-yml-除外" class="headerlink" title="_：以下划线开头的单词为自定义，非专有名词；_confg.yml 除外"></a><code>_</code>：以下划线开头的单词为自定义，非专有名词；<code>_confg.yml</code> 除外</h5><p>前置准备</p>
+        <h4 id="：以下划线开头的单词为自定义，非专有名词；-confg-yml-除外"><a href="#：以下划线开头的单词为自定义，非专有名词；-confg-yml-除外" class="headerlink" title="_：以下划线开头的单词为自定义，非专有名词；_confg.yml 除外"></a><code>_</code>：以下划线开头的单词为自定义，非专有名词；<code>_confg.yml</code> 除外</h4><p>前置准备</p>
 <ol>
 <li><p>Node.js：不低于 10.13 recommend 不低于 12</p>
 </li>
@@ -277,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kldn.com/2020/11/02/Hexo/BuildBlog/" data-id="ckhr3c35v0001kxyagyupd22j" class="article-share-link">Share</a>
+      <a data-url="http://kldn.com/2020/11/02/Hexo/BuildBlog/" data-id="cki456cm50001asya1bureox7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -315,11 +423,14 @@
 <p>Here are some blogs and notes to record and storage incoming from work and learn.</p>
 </blockquote>
 <p><img src="/images/bg.jpg"></p>
-
+<!-- 
+    此处注意相对路径的写法，public 的路径用 / 指向
+    ../../../../images/bg.jpg === /images/bg.jpg
+ -->
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kldn.com/2020/11/02/Home/" data-id="ckhr3c35r0000kxya7nuaauzz" class="article-share-link">Share</a>
+      <a data-url="http://kldn.com/2020/11/02/Home/" data-id="cki456cm10000asyacfu61n82" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +450,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hexo/">Hexo</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Hook/">Hook</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python3/">Python3</a></li></ul>
     </div>
   </div>
 
@@ -367,7 +478,15 @@
       <ul>
         
           <li>
-            <a href="/2020/11/02/Hexo/BuildBlog/">Blog by Hexo + Github</a>
+            <a href="/2020/11/30/Python3/Python3/">Python3 环境准备</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/21/Hook/CustomHook/">自定义 Hook - React</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/02/Hexo/BuildBlog/">Hexo + Github Pages 搭建个人博客</a>
           </li>
         
           <li>
